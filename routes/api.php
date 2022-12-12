@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('contacts/information/{contact_id}', [InformationController::class, 'add']);
     Route::delete('contacts/information/{contact_id}', [InformationController::class, 'remove']);
     Route::get('reports/people/location/{city_id}', [ReportController::class, 'getPeopleByLocation']);
+    Route::get('reports/phones/location/{city_id}', [ReportController::class, 'getPhonesByLocation']);
 
 
 });
