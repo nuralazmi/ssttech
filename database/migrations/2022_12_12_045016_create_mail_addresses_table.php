@@ -14,6 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('contact_id');
             $table->foreign('contact_id')->references('id')->on('contacts');
             $table->string('email')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

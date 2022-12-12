@@ -40,7 +40,7 @@ class ContactController extends Controller
         ])
             ->skip($request->input('page') * $request->input('limit'))
             ->take($request->input('limit'))
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         $this->setData($list);
@@ -74,6 +74,17 @@ class ContactController extends Controller
 
         if ($request->has('debug')) $this->setDebug(true);
         return $this->apiResponse();
+    }
 
+    public function destroy($id, Request $request): JsonResponse
+    {
+        $this->addLog('Started destroy function');
+
+        $contact = Contact::find($id);
+        if ($contact) $contact->delete();
+        else $this->addLog('ID invalid');
+
+        if ($request->has('debug')) $this->setDebug(true);
+        return $this->apiResponse();
     }
 }

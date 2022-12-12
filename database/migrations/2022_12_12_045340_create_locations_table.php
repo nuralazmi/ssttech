@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreign('contact_id')->references('id')->on('contacts');
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
