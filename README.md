@@ -39,5 +39,5 @@ NOTE : You have to run "php artisan horizon" in new terminal(docker exec -it sst
 - [✓] Auth with token
 - [✓] SOA orianted design
 - [✓] Queue (Horizon)
-- [✓] Redis
+- [✓] Cache - File
 - [no] Api Docs (But there is postman collection in this repo)
