@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InformationController;
-
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +21,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('contacts', ContactController::class);
     Route::post('contacts/information/{contact_id}', [InformationController::class, 'add']);
     Route::delete('contacts/information/{contact_id}', [InformationController::class, 'remove']);
+    Route::get('reports/people/location/{city_id}', [ReportController::class, 'getPeopleByLocation']);
+
 
 });
 Route::get('/contacts', [ContactController::class, 'index']);
