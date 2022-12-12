@@ -11,7 +11,7 @@
     - DB_DATABASE=ssttech 
     - DB_USERNAME=ssttech_user 
     - DB_PASSWORD=ssttech_password 
-    - CACHE_DRIVER=redis 
+    - CACHE_DRIVER=file 
     - QUEUE_CONNECTION=redis 
     - REDIS_HOST=redis
 - docker-compose build app
