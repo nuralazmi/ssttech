@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class ContactCreateJob implements ShouldQueue
 {
@@ -39,6 +40,8 @@ class ContactCreateJob implements ShouldQueue
                 AddMailAddressJob::dispatch($this->details);
             else
                 AddLocationJob::dispatch($this->details);
+
+            Cache::flush();
         }
     }
 }

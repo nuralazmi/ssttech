@@ -6,6 +6,7 @@ use App\Http\Traits\ApiResponser;
 use App\Models\City;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
@@ -15,12 +16,14 @@ class ReportController extends Controller
     public function getPeopleByLocation($city_id, Request $request): JsonResponse
     {
         $this->addLog('Started getPeopleByLocation function');
-        $items = City::with('country')
-            ->withCount([
-                'locations as people_count' => function ($query) use ($city_id) {
-                    $query->where('city_id', $city_id);
-                }
-            ])->find($city_id);
+        $items = Cache::rememberForever('report_people_'.$city_id, function () use ($city_id, $request) {
+            return City::with('country')
+                ->withCount([
+                    'locations as people_count' => function ($query) use ($city_id) {
+                        $query->where('city_id', $city_id);
+                    }
+                ])->find($city_id);
+        });
         if ($items !== null) $this->setData($items);
 
         $this->addLog('Function ended');
@@ -44,10 +47,12 @@ class ReportController extends Controller
             $this->setStatusCode(400);
             return $this->apiResponse();
         }
-        $item = City::with([
-            'locations.contact.phones',
-            'country'
-        ])->find($city_id);
+        $item = Cache::rememberForever('report_people_'.$city_id, function () use ($city_id, $request) {
+            return City::with([
+                'locations.contact.phones',
+                'country'
+            ])->find($city_id);
+        });
         $item->phones_count = 0;
         foreach ($item->locations as $location) {
             if (isset($location->contact->phones)) $item->phones_count += count($location->contact->phones);

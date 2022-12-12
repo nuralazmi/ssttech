@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class ContactUpdateJob implements ShouldQueue
 {
@@ -25,5 +26,7 @@ class ContactUpdateJob implements ShouldQueue
     {
         Contact::find($this->details['id'])
             ->update($this->details);
+
+        Cache::flush();
     }
 }

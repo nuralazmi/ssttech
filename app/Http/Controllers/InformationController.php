@@ -13,6 +13,7 @@ use App\Models\MailAddress;
 use App\Models\PhoneNumber;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class InformationController extends Controller
 {
@@ -34,6 +35,7 @@ class InformationController extends Controller
 
         $this->addLog('Function ended');
 
+        Cache::flush();
         if ($request->has('debug')) $this->setDebug(true);
         return $this->apiResponse();
     }

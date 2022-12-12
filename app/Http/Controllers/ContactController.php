@@ -10,6 +10,7 @@ use App\Jobs\ContactUpdateJob;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,22 +34,24 @@ class ContactController extends Controller
             return $this->apiResponse();
         }
         $this->addLog('Parameters validated');
-        $list = Contact::with([
-            'phones',
-            'locations.city.country',
-            'emails'
-        ])
-            ->skip($request->input('page') * $request->input('limit'))
-            ->take($request->input('limit'))
-            ->orderBy('id', 'desc')
-            ->get();
-
+        $list = Cache::rememberForever('contact_page_'.$request->get('page').'_limit_'.$request->get('limit'), function () use ($request) {
+            return Contact::with([
+                'phones',
+                'locations.city.country',
+                'emails'
+            ])
+                ->skip($request->input('page') * $request->input('limit'))
+                ->take($request->input('limit'))
+                ->orderBy('id', 'desc')
+                ->get();
+        });
         $this->setData($list);
         return $this->apiResponse();
     }
 
     public function store(ContactPostStore $request): JsonResponse
     {
+
         $this->addLog('Started store function');
         $validate = $request->validated();
         $this->addLog('Parameters validated');
