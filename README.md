@@ -35,6 +35,7 @@ NOTE : You have to run "php artisan horizon" in new terminal(docker exec -it sst
 - [-] Postgres - (I used MYSQL)
 - [✓] Eloquent ORM
 - [✓] Migration & Seeders
+- [✓] Test
 - [✓] Auth with token
 - [✓] SOA orianted design
 - [✓] Queue (Horizon)
