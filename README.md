@@ -24,7 +24,7 @@
 - php artisan test
 - php artisan serve
 
-NOTE : You have to run "php artisan horizon" in new terminal. I couldn't identify supervisor. I'm sorry. 
+NOTE : You have to run "php artisan horizon" in new terminal(docker exec -it ssttech-app bash). I couldn't identify supervisor. I'm sorry. 
 
 ## Check List
 
