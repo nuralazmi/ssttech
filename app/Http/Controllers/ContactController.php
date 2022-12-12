@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactPostStore;
 use App\Http\Traits\ApiResponser;
+use App\Jobs\ContactCreateJob;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,4 +44,15 @@ class ContactController extends Controller
         return $this->apiResponse();
     }
 
+    public function store(ContactPostStore $request): JsonResponse
+    {
+        $this->addLog('Started store function');
+        $validate = $request->validated();
+        $this->addLog('Parameters validated');
+
+        ContactCreateJob::dispatch($validate);
+
+        if ($request->has('debug')) $this->setDebug(true);
+        return $this->apiResponse();
+    }
 }
