@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::resource('contacts', ContactController::class);
     Route::post('contacts/information/{contact_id}', [InformationController::class, 'add']);
+    Route::delete('contacts/information/{contact_id}', [InformationController::class, 'remove']);
 
 });
 Route::get('/contacts', [ContactController::class, 'index']);
