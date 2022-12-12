@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: sammy
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: ssttech
+        container_name: ssttech-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - ssttech
+
+    db:
+        image: mysql:8.0
+        container_name: ssttech-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - ssttech
+
+    nginx:
+        image: nginx:alpine
+        container_name: ssttech-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - ssttech
+    redis:
+        image: redis:6.2.1-buster
+        container_name: redis
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - ./redis/data:/data
+        networks:
+            - ssttech
+
+networks:
+    ssttech:
+        driver: bridge
+
+
