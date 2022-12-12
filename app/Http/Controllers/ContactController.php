@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactPostStore;
+use App\Http\Requests\ContactPutStore;
 use App\Http\Traits\ApiResponser;
 use App\Jobs\ContactCreateJob;
+use App\Jobs\ContactUpdateJob;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
@@ -54,5 +57,23 @@ class ContactController extends Controller
 
         if ($request->has('debug')) $this->setDebug(true);
         return $this->apiResponse();
+    }
+
+    public function update(ContactPutStore $request, $id): JsonResponse
+    {
+        $this->addLog('Started update function');
+        $validate = $request->validated();
+        $this->addLog('Parameters validated');
+
+        $db_parameters = array_filter($validate, function ($key) {
+            return Schema::hasColumn('contacts', $key);
+        }, ARRAY_FILTER_USE_KEY);
+
+        $db_parameters['id'] = $id;
+        ContactUpdateJob::dispatch($db_parameters);
+
+        if ($request->has('debug')) $this->setDebug(true);
+        return $this->apiResponse();
+
     }
 }
