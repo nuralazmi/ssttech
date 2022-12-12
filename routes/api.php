@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\InformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::resource('contacts', ContactController::class);
+    Route::post('contacts/information/{contact_id}', [InformationController::class, 'add']);
+
 });
 Route::get('/contacts', [ContactController::class, 'index']);
