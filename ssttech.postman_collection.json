@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "bc25f323-0186-4ccf-bbce-ec73918ccdbe",
+		"name": "ssttech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6436692"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "debug",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "nuralazmi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{api_url}}/login",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|A79PFC6kv30gG5AFdSaWw965JpkbXN7Beveue7PK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "debug",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "nuralazmi",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{api_url}}/logout",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create contact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|cVbATId1UdNkVa5sA0CrFkcyeUH1bCuxdWrh4oz1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"debug\" : true,\n    \"name\" : \"Azmi11123\",\n    \"last_name\" : \"Nural\",\n    \"company_id\" : 1,\n    \"photo\" : \"http://www.penege.com/wp-content/uploads/2017/02/facebook-logo.png\",\n    \"information_type\" : \"email\",\n    \"information_content\" : \"nuralazmi@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/contacts",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add information to contact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|cVbATId1UdNkVa5sA0CrFkcyeUH1bCuxdWrh4oz1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"debug\" : true,\n    \"information_type\" : \"email\",\n    \"information_content\" : \"nuralazmi5@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/contacts/information/5",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						"information",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove information from contact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|LjbTt2FU8lj5Ft8WU9vkmQC7gDBU1FCcj2SkGGbl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"debug\" : true,\n    \"information_type\" : \"location\",\n    \"information_content\" : \"252\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/contacts/information/5",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						"information",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove contact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|LjbTt2FU8lj5Ft8WU9vkmQC7gDBU1FCcj2SkGGbl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/contacts/1",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list contact",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/contacts/?page=0&limit=3",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list people by location",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|cVbATId1UdNkVa5sA0CrFkcyeUH1bCuxdWrh4oz1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/reports/people/location/1?debug=true",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"reports",
+						"people",
+						"location",
+						"1"
+					],
+					"query": [
+						{
+							"key": "debug",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list phones by location",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|cVbATId1UdNkVa5sA0CrFkcyeUH1bCuxdWrh4oz1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/reports/phones/location/5?debug=true",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"reports",
+						"phones",
+						"location",
+						"5"
+					],
+					"query": [
+						{
+							"key": "debug",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update contact",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "5|lhSYy3oU2DxZzGOwrSKgKNzVvhD7M7qxpCJyr76O",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"debug\" : true,\n    \"name\" : \"Azmi22\",\n    \"last_name\" : \"Nural\",\n    \"company_id\" : 1,\n    \"photo\" : \"http://www.penege.com/wp-content/uploads/2017/02/facebook-logo.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/contacts/10",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"contacts",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
