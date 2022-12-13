@@ -41,3 +41,11 @@ NOTE : You have to run "php artisan horizon" in new terminal(docker exec -it sst
 - [✓] Queue (Horizon)
 - [✓] Cache - File
 - [no] Api Docs (But there is postman collection in this repo)
+
+## Login Info
+
+http://127.0.0.1:8000/api
+username : nuralazmi
+password : 123456
+debug    : true  (optional)
+
